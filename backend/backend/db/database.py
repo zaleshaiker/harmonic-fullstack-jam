@@ -2,18 +2,11 @@
 import os
 import uuid
 from datetime import datetime
+from enum import Enum
 from typing import Union
 
-from sqlalchemy import (
-    Column,
-    DateTime,
-    ForeignKey,
-    Integer,
-    String,
-    UniqueConstraint,
-    create_engine,
-    func,
-)
+from sqlalchemy import (Column, DateTime, ForeignKey, Integer, String,
+                        UniqueConstraint, create_engine, func)
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -72,4 +65,15 @@ class CompanyCollectionAssociation(Base):
     id = Column(Integer, primary_key=True, index=True)
     company_id = Column(Integer, ForeignKey("companies.id"))
     collection_id = Column(UUID(as_uuid=True), ForeignKey("company_collections.id"))
+
+class BulkAddJob(Base):
+    __tablename__ = "bulk_add_jobs"
+
+    created_at: Union[datetime, Column[datetime]] = Column(
+        DateTime, default=datetime.utcnow, server_default=func.now(), nullable=False
+    )
+    id = Column(Integer, primary_key=True, index=True)
+    status = Column(String, index=True)
+    added = Column(Integer, index=True)
+    total = Column(Integer, index=True)
 
