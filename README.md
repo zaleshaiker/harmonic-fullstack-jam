@@ -19,4 +19,4 @@ The tradeoff with this API design is that there is an overhead to setting up the
 
 ## Demo Video
 
-https://raw.githubusercontent.com/zaleshaiker/harmonic-fullstack-jam/main/Demo%20Video.mp4
+https://youtu.be/m5MsbDirQ2k
